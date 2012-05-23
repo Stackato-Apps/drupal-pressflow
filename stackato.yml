@@ -1,0 +1,24 @@
+name: drupal-pressflow
+instances: 2
+framework: php
+services:
+    mysql-drupal-pressflow: mysql
+    fs-drupal-pressflow: filesystem
+min_version:
+    server: 1.0
+hooks:
+    post-staging:
+        # Set up settings.php and initialize the database
+        - cp sites/default/default.settings.php sites/default/settings.php
+        - cat settings-databases.php | tee -a sites/default/settings.php
+        - php sample-install.php
+    pre-running:
+        # remove some directories created by drush post-staging
+        - chmod u+w sites/default
+        - rm -rf sites/{default/files,all/themes,all/modules}
+        # recreate these in the shared filesystem and link to them
+        - mkdir -p $STACKATO_FILESYSTEM/sites/{default/files,all/themes,all/modules}
+        - ln -s "$STACKATO_FILESYSTEM"/sites/default/files sites/default
+        - ln -s "$STACKATO_FILESYSTEM"/sites/all/themes sites/all
+        - ln -s "$STACKATO_FILESYSTEM"/sites/all/modules sites/all
+        - chmod u-w sites/default
