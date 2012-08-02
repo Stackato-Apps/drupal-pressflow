@@ -24,7 +24,7 @@ hooks:
         - ln -s "$STACKATO_FILESYSTEM"/sites sites
 
         # This does the full install.
-        - $STACKATO_APP_ROOT/drush/drush -r $HOME site-install -y --db-url=$DATABASE_URL --account-name=admin --account-pass=passwd --site-name=Stackato --locale=en-US
+        - "- $STACKATO_APP_ROOT/drush/drush -r $HOME site-install -y --db-url=$DATABASE_URL --account-name=admin --account-pass=passwd --site-name=Stackato --locale=en-US"
         
     pre-running:
         # Workaround to pass $VCAP_SERVICES to cron
