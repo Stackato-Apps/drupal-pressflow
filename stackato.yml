@@ -1,4 +1,4 @@
-name: pressflow
+name: drupal-pressflow
 instances: 1
 framework: php
 mem: 256M
@@ -17,16 +17,16 @@ hooks:
         # create sites in the shared filesystem and migrate
         - mkdir -p "$STACKATO_FILESYSTEM"/sites
         - cp -r sites/* "$STACKATO_FILESYSTEM"/sites/
-        
+
         # remove unused directories
         - rm -rf sites
-        
+
         # link to sites folder in the shared filesystem
         - ln -s "$STACKATO_FILESYSTEM"/sites sites
 
         # This does the full install.
         - "- $STACKATO_APP_ROOT/drush/drush -r $HOME site-install -y --db-url=$DATABASE_URL --account-name=admin --account-pass=passwd --site-name=Stackato --locale=en-US"
-        
+
     pre-running:
         # Workaround to pass $VCAP_SERVICES to cron
         - python vcap-workaround.py
