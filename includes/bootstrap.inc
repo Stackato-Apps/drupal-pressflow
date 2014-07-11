@@ -716,7 +716,9 @@ function drupal_settings_initialize() {
   if (file_exists(DRUPAL_ROOT . '/' . conf_path() . '/settings.php')) {
     include_once DRUPAL_ROOT . '/' . conf_path() . '/settings.php';
   }
-  $is_https = isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on';
+  $vcap_app = json_decode(getenv('VCAP_APPLICATION'), true);
+  $sso_enabled = $vcap_app['sso_enabled'];
+  $is_https = $sso_enabled || (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on');
 
   // Load environmental config, if present.
   if (isset($_SERVER['PRESSFLOW_SETTINGS'])) {
