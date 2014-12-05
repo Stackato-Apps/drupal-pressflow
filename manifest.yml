@@ -25,7 +25,7 @@ applications:
       # This does the full install.
       - "$STACKATO_APP_ROOT/drush/drush -r $HOME site-install
         -y --db-url=$DATABASE_URL --account-name=admin --account-pass=passwd
-        --site-name=Stackato --locale=en-US"
+        --site-name=Stackato --locale=en-US || true"
       pre-running:
       # Workaround to pass $VCAP_SERVICES to cron
       - python vcap-workaround.py
