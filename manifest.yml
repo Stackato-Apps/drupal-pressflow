@@ -15,13 +15,21 @@ applications:
       - curl -sfS http://ftp.drupal.org/files/projects/drush-7.x-5.1.tar.gz |
         tar xzf -
       - mv drush "$STACKATO_APP_ROOT"/
+      - curl -sfS http://ftp.drupal.org/files/projects/smtp-7.x-1.2.tar.gz |
+        tar xzf -
+      - mv smtp "$STACKATO_APP_ROOT"/app/modules/smtp
       # create sites in the shared filesystem and migrate
       - mkdir -p "$STACKATO_FILESYSTEM"/sites
       - cp -r sites/* "$STACKATO_FILESYSTEM"/sites/
+      # create modules in the shared filesystem and migrate
+      - mkdir -p "$STACKATO_FILESYSTEM"/modules
+      - cp -r modules/* "$STACKATO_FILESYSTEM"/modules/
       # remove unused directories
       - rm -rf sites
+      - rm -rf modules
       # link to sites folder in the shared filesystem
       - ln -s "$STACKATO_FILESYSTEM"/sites sites
+      - ln -s "$STACKATO_FILESYSTEM"/modules modules
       # This does the full install.
       - "$STACKATO_APP_ROOT/drush/drush -r $HOME site-install
         -y --db-url=$DATABASE_URL --account-name=admin --account-pass=passwd
