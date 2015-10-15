@@ -1,9 +1,9 @@
 # Drupal Demo
 
-This demo installs Drupal Pressflow to Stackato by using 'drush' in post-staging
-hooks. The manifest.yml file shows how these are run, and demonstrates the use
-of the filesystem service for sharing user content, themes and modules between
-application instances.
+This demo installs Drupal Pressflow to HPE Helion Stackato by using 'drush' in
+post-staging hooks. The manifest.yml file shows how these are run, and
+demonstrates the use of the filesystem service for sharing user content, themes
+and modules between application instances.
 
 The 'sites' directory tree is linked to a single mounted filesystem
 service, but you can set these up on multiple filesystem services (e.g.
@@ -16,7 +16,7 @@ scalability and which is particularly useful for high traffic sites.
 
 See the [Pressflow Website](http://pressflow.org/) for more details.
 
-## Deploying to Stackato
+## Deploying to HPE Helion Stackato
 
     stackato push -n
 
