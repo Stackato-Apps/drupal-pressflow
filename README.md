@@ -1,8 +1,8 @@
 # Drupal Demo
 
 This demo installs Drupal Pressflow to Stackato by using 'drush' in post-staging
-hooks. The stackato.yml file shows how these are run, and demonstrates the use 
-of the filesystem service for sharing user content, themes and modules between 
+hooks. The manifest.yml file shows how these are run, and demonstrates the use
+of the filesystem service for sharing user content, themes and modules between
 application instances.
 
 The 'sites' directory tree is linked to a single mounted filesystem
